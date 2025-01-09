@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const input = document.querySelector('.centered-input input');
       const wordContainer = document.querySelector('.word-container');
       const selectedWordsInput = document.getElementById('selected-words');
+      const copyButton = document.getElementById('copy-button');
 
       // Load saved words from local storage
       const savedWords = JSON.parse(localStorage.getItem('words')) || [];
@@ -20,6 +21,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         input.value = '';
                   }
             }
+      });
+
+      copyButton.addEventListener('click', () => {
+            selectedWordsInput.removeAttribute('disabled');
+            selectedWordsInput.select();
+            document.execCommand('copy');
+            selectedWordsInput.setAttribute('disabled', 'true');
       });
 
       function createWordElement(word) {
