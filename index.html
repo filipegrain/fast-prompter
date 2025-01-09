@@ -4,20 +4,25 @@
 <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Fast Proooooompt</title>
+      <title>Fast Prooooooooooooooompt</title>
       <link rel="stylesheet" href="style.css">
       <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+      <link rel="icon" href="red-car-icon.png" type="image/png">
       <script src="main.js" defer></script>
 </head>
 
 <body>
       <div class="centered-input">
             <input type="text" id="add-new-word" placeholder="Add new word">
-            <input type="text" id="pasted-text" placeholder="Pasted text">
+            <div class="pasted-text-container">
+                  <input type="text" id="pasted-text" placeholder="Pasted text">
+                  <button id="add-pasted-text-button">add</button>
+            </div>
       </div>
       <div class="word-container"></div>
+      <button id="clear-button">remove all</button>
       <input type="text" id="selected-words" readonly disabled>
-      <button id="copy-button">Copy</button>
+      <button id="copy-button">copy</button>
 </body>
 
 </html>

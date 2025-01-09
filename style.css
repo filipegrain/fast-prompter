@@ -14,7 +14,8 @@ body {
 }
 
 .centered-input input {
-      width: 100%;
+      width: auto;
+      min-width: 100%;
       padding: 10px;
       font-size: 1.5em;
       background-color: transparent;
@@ -22,6 +23,25 @@ body {
       border-radius: 10px;
       color: white;
       margin-bottom: 10px;
+}
+
+.pasted-text-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+}
+
+.pasted-text-container input {
+      flex: 1;
+}
+
+.pasted-text-container button {
+      padding: 10px;
+      font-size: 1.5em;
+      border: none;
+      background-color: transparent;
+      color: white;
+      cursor: pointer;
 }
 
 .word-container {
@@ -58,12 +78,23 @@ body {
       word-wrap: break-word;
 }
 
+#add-pasted-text-button {
+      color: greenyellow
+}
+
 #copy-button {
+      color: yellow;
+}
+
+#clear-button {
+      color: red
+}
+
+#copy-button,
+#clear-button {
       padding: 10px;
       font-size: 1.5em;
       border: none;
       background-color: transparent;
-      color: white;
       cursor: pointer;
-      margin-top: 10px;
 }

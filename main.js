@@ -1,9 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
       const addNewWordInput = document.querySelector('.centered-input #add-new-word');
       const pastedTextInput = document.getElementById('pasted-text');
+      const addPastedTextButton = document.getElementById('add-pasted-text-button');
       const wordsContainer = document.querySelector('.word-container');
       const selectedWordsInput = document.getElementById('selected-words');
       const copyButton = document.getElementById('copy-button');
+      const clearButton = document.getElementById('clear-button');
 
       // Load saved words from local storage
       const savedWords = JSON.parse(localStorage.getItem('words')) || [];
@@ -11,6 +13,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const wordElement = createWordElement(word);
             wordsContainer.appendChild(wordElement);
       });
+
+      // Show or hide the clear button based on the words list length
+      toggleClearButton();
+
+      // Show or hide the add button based on the pasted-text input value
+      toggleAddButton();
+
+      // Show or hide the copy button based on the selected-words input value
+      toggleCopyButton();
 
       addNewWordInput.addEventListener('keypress', (event) => {
             if (event.key === 'Enter') {
@@ -20,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         wordsContainer.appendChild(wordElement);
                         saveWord(word);
                         addNewWordInput.value = '';
+                        toggleClearButton();
                   }
             }
       });
@@ -28,11 +40,29 @@ document.addEventListener('DOMContentLoaded', () => {
             pastedTextInput.select();
       });
 
+      pastedTextInput.addEventListener('input', () => {
+            toggleAddButton();
+      });
+
+      addPastedTextButton.addEventListener('click', () => {
+            const word = pastedTextInput.value.trim();
+            if (word) {
+                  selectedWordsInput.value += word + ' ';
+                  toggleCopyButton();
+            }
+      });
+
       copyButton.addEventListener('click', () => {
             selectedWordsInput.removeAttribute('disabled');
             selectedWordsInput.select();
             document.execCommand('copy');
             selectedWordsInput.setAttribute('disabled', 'true');
+      });
+
+      clearButton.addEventListener('click', () => {
+            wordsContainer.innerHTML = '';
+            localStorage.removeItem('words');
+            toggleClearButton();
       });
 
       function createWordElement(word) {
@@ -49,6 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             wordElement.addEventListener('click', () => {
                   selectedWordsInput.value += word + ' ';
+                  toggleCopyButton();
             });
 
             const deleteIcon = document.createElement('span');
@@ -61,6 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
             deleteIcon.addEventListener('click', () => {
                   deleteWord(word);
                   wordElement.remove();
+                  toggleClearButton();
             });
 
             wordElement.appendChild(deleteIcon);
@@ -86,5 +118,29 @@ document.addEventListener('DOMContentLoaded', () => {
                   color += letters[Math.floor(Math.random() * 16)];
             }
             return color;
+      }
+
+      function toggleClearButton() {
+            if (wordsContainer.children.length > 0) {
+                  clearButton.style.display = 'block';
+            } else {
+                  clearButton.style.display = 'none';
+            }
+      }
+
+      function toggleAddButton() {
+            if (pastedTextInput.value.trim() !== '') {
+                  addPastedTextButton.style.display = 'inline-block';
+            } else {
+                  addPastedTextButton.style.display = 'none';
+            }
+      }
+
+      function toggleCopyButton() {
+            if (selectedWordsInput.value.trim() !== '') {
+                  copyButton.style.display = 'inline-block';
+            } else {
+                  copyButton.style.display = 'none';
+            }
       }
 });
