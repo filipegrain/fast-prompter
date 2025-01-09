@@ -1,0 +1,63 @@
+body {
+      background-color: black;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      padding-top: 5vh;
+      font-family: 'Roboto', sans-serif;
+}
+
+.centered-input {
+      text-align: center;
+}
+
+.centered-input input {
+      width: 100%;
+      padding: 10px;
+      font-size: 1.5em;
+      background-color: transparent;
+      border: 2px solid white;
+      border-radius: 10px;
+      color: white;
+}
+
+.word-container {
+      margin-top: 20px;
+      padding: 20px;
+}
+
+.bottom-input {
+      display: flex;
+      align-items: center;
+      position: fixed;
+      bottom: 20px;
+}
+
+#selected-words {
+      padding: 10px;
+      font-size: 1.5em;
+      background-color: transparent;
+      border: 2px solid white;
+      border-radius: 10px;
+      color: white;
+      text-align: center;
+      margin-top: 20px;
+      width: auto;
+      min-width: 80%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+}
+
+#copy-button {
+      padding: 10px;
+      font-size: 1.5em;
+      border: none;
+      background-color: transparent;
+      color: white;
+      cursor: pointer;
+      position: fixed;
+      bottom: 20px;
+}
