@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-      const input = document.querySelector('.centered-input input');
-      const wordContainer = document.querySelector('.word-container');
+      const addNewWordInput = document.querySelector('.centered-input #add-new-word');
+      const pastedTextInput = document.getElementById('pasted-text');
+      const wordsContainer = document.querySelector('.word-container');
       const selectedWordsInput = document.getElementById('selected-words');
       const copyButton = document.getElementById('copy-button');
 
@@ -8,19 +9,23 @@ document.addEventListener('DOMContentLoaded', () => {
       const savedWords = JSON.parse(localStorage.getItem('words')) || [];
       savedWords.forEach(word => {
             const wordElement = createWordElement(word);
-            wordContainer.appendChild(wordElement);
+            wordsContainer.appendChild(wordElement);
       });
 
-      input.addEventListener('keypress', (event) => {
+      addNewWordInput.addEventListener('keypress', (event) => {
             if (event.key === 'Enter') {
-                  const word = input.value.trim();
+                  const word = addNewWordInput.value.trim();
                   if (word) {
                         const wordElement = createWordElement(word);
-                        wordContainer.appendChild(wordElement);
+                        wordsContainer.appendChild(wordElement);
                         saveWord(word);
-                        input.value = '';
+                        addNewWordInput.value = '';
                   }
             }
+      });
+
+      pastedTextInput.addEventListener('focus', () => {
+            pastedTextInput.select();
       });
 
       copyButton.addEventListener('click', () => {
